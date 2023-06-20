@@ -5,10 +5,11 @@
 #     3. A battle simulation will be done between p1's pokemon and p2's pokemon
 
 class Pokemon
-  attr_accessor :name, :type, :hp, :power, :strength, :weakness
+  attr_accessor :name, :evolved, :type, :hp, :power, :strength, :weakness
 
-  def initialize(name, type, hp, power, strength, weakness)
+  def initialize(name, evolved, type, hp, power, strength, weakness)
     @name = name
+    @evolved = evolved
     @type = type
     @hp = hp
     @power = power
@@ -20,17 +21,20 @@ class Pokemon
     damage = rand(1..power)
     if opponent.type == strength
       damage *= 2  # Double damage against your strength type
-      puts "It's super effective!"
+      puts "#{name} attacks #{opponent.name} and deals #{damage} damage!\nIt's super effective!"
     elsif opponent.type == weakness
       damage /= 2  # Half damage against your weakness type
-      puts "It's not very effective..."
+      puts "#{name} attacks #{opponent.name} and deals #{damage} damage!\nIt's not very effective..."
     end
     opponent.hp -= damage
-    puts "#{name} attacks #{opponent.name} and deals #{damage} damage!"
   end
 
   def alive?
     hp > 0
+  end
+
+  def evolved?
+    hp > 50
   end
 
   def to_s
@@ -44,13 +48,13 @@ def battle(p1, p2)
     p2.attack(p1)
     p1.hp = 0 if p1.hp < 0
     p2.hp = 0 if p2.hp < 0
-    puts "Your HP: #{p1.hp} / opponent HP: #{p2.hp}"
+    puts "Your HP: #{p1.hp} / Opponent HP: #{p2.hp}"
   end
 
   if p1.alive?
-    puts 'You win!'
+    puts "...\n#{p1.name} has beaten #{p2.name}.\nYou win!"
   elsif p2.alive?
-    puts 'You lose!'
+    puts "...\n#{p1.name} has lost to #{p2.name}.\nYou lose!"
   else
     puts "It's a draw!"
   end
@@ -60,11 +64,21 @@ def show_info(*p)
   p.each_with_index { |x, i| puts "Player #{i + 1}: #{x.name}, HP: #{x.hp}, Power: #{x.power}" }
 end
 
+def is_evolve?(*p)
+  p.each do |pokemon|
+    next unless pokemon.hp > 50 || pokemon.power > 20
+
+    child = pokemon.name
+    pokemon.name = pokemon.evolved
+    puts "!!!\nWhat's happening? It seems like #{child} has evolved to #{pokemon.name}!"
+  end
+end
+
 # List of Pokemon
 pokemons = [
-  bulbasaur = Pokemon.new('Bulbasaur', 'Grass', rand(20..119), rand(10..29), 'Water', 'Fire'),
-  charmander = Pokemon.new('Charmander', 'Fire', rand(20..119), rand(10..29), 'Grass', 'Water'),
-  squirtle = Pokemon.new('Squirtle', 'Water', rand(20..119), rand(10..29), 'Fire', 'Grass')
+  bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Grass', 20+rand(100), 10+rand(20), 'Water', 'Fire'),
+  charmander = Pokemon.new('Charmander', 'Charmeleon', 'Fire', 20+rand(100), 10+rand(20), 'Grass', 'Water'),
+  squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Water', 20+rand(100), 10+rand(20), 'Fire', 'Grass')
 ]
 
 # Player chooses a starting Pokemon
@@ -89,8 +103,11 @@ p2 = pokemons.sample  # Randomly select opponent Pokemon
 
 puts "You chose #{p1.name}!"
 puts "Your rival chose #{p2.name}!"
+
+is_evolve?(p1, p2)
+
 puts '============='
-puts 'PLAYERS INFO'
+puts 'POKEMONS INFO'
 show_info(p1, p2)
 puts '============='
 
