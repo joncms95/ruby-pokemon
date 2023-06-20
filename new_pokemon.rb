@@ -64,7 +64,7 @@ class Bulbasaur < Pokemon
       leech_seed(opponent)
     else # initial hydration
       @skill_counter = 5
-      puts "Bulbasaur casts leech seed! Bulbasaur will draw 5 hp per turn. (Last for 5 turns)"
+      puts "Bulbasaur casts Leech Seed! Bulbasaur will draw 5 hp per turn. (Last for 5 turns)"
       leech_seed(opponent)
     end
   end
@@ -87,7 +87,7 @@ class Charmander < Pokemon
 
   def use_skill(opponent)
     ember(opponent)
-    puts "#{name} casts ember! #{name} burns #{opponent.name} and deals #{@skill_damage} damage."
+    puts "#{name} casts Ember! #{name} burns #{opponent.name} and deals #{@skill_damage} damage."
   end
 
   def ember(opponent)
@@ -110,7 +110,7 @@ class Snorlax < Pokemon
     else # initial hydration
       @skill_counter = 2
       rest
-      puts "#{name} rests! #{name} restore 50 hp but will sleep for 2 turns."
+      puts "#{name} Rests! #{name} restore 50 hp but will sleep for 2 turns."
       @skill_counter -= 1
     end
   end
@@ -132,12 +132,12 @@ class Squirtle < Pokemon
 
   def use_skill(_opponent = nil)
     if @skill_counter > 0
-      puts "#{name} has iron defense... (Turns left: #{@skill_counter})"
+      puts "#{name} has Iron Defense... (Turns left: #{@skill_counter})"
       @skill_counter -= 1
     else # initial hydration
       @skill_counter = 3
       iron_defense
-      puts "#{name} casts iron defense! #{name} will only receive 50% damage for 3 turns."
+      puts "#{name} casts Iron Defense! #{name} will only receive 50% damage for 3 turns."
       @skill_counter -= 1
     end
   end
