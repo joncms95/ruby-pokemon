@@ -1,14 +1,9 @@
-#     Simple Pokemon Game in Ruby
-#     ---------------------------
-#     1. Player 1 (p1) will choose one pokemon from the list of pokemons
-#     2. Player 2 (p2) will randomly pick one of the leftover pokemons
-#     3. A battle simulation will be done between p1's pokemon and p2's pokemon
-#     ---------------------------
-#     Discrepencies from actual product vs requirements
-#     1. If Squirtle is second player to hit, his first turn of Iron Defense is not accounted
-#
-#     TODO:
-#     - Pokemon Type +10% Bonus Damage
+#     Simple Pokémon Game in Ruby
+#     --------------------------------------------------------------------------
+#     1. Player 1 (p1) will choose one Pokémon from the list of Pokémons
+#     2. Player 2 (p2) will randomly pick one of the leftover Pokémons
+#     3. A battle simulation will be done between p1's Pokémon and p2's Pokémon
+#     --------------------------------------------------------------------------
 
 # Classes
 class Pokemon
@@ -33,12 +28,12 @@ class Pokemon
       use_skill(opponent)
     end
 
-    if @attack_status == true && @stun_status == 0
-      critical_hit?
-      damage = (@attack * @attack_multiplier * opponent.defense_multiplier)
-      puts "#{@name} attacks #{opponent.name} and deals #{damage} damage!"
-      opponent.hp -= damage
-    end
+    return unless @attack_status == true && @stun_status == 0
+
+    critical_hit?
+    damage = (@attack * @attack_multiplier * opponent.defense_multiplier)
+    puts "#{@name} attacks #{opponent.name} and deals #{damage} damage!"
+    opponent.hp -= damage
   end
 
   def alive?
@@ -46,10 +41,10 @@ class Pokemon
   end
 
   def critical_hit?
-    if rand <= 0.05
-      @attack_multiplier = 2.0
-      print "It's a critical hit! "
-    end
+    return unless rand <= 0.05
+
+    @attack_multiplier = 2.0
+    print "It's a critical hit! "
   end
 
   def reset_status
@@ -201,7 +196,7 @@ def show_info(*p)
   p.each_with_index { |x, i| puts "Player #{i + 1}: #{x.name}, HP: #{x.hp}, Attack: #{x.attack}" }
 end
 
-# List of Pokemon
+# List of Pokémon
 pokemons = [
   bulbasaur = Bulbasaur.new,
   charmander = Charmander.new,
@@ -210,10 +205,10 @@ pokemons = [
   pikachu = Pikachu.new
 ]
 
-# Player chooses a starting Pokemon
-puts "Choose your starting Pokemon: (You can only randomly choose Pikachu)"
+# Player chooses a starting Pokémon
+puts "Choose your starting Pokémon: (You can only randomly choose Pikachu)"
 pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon.name}" }
-puts "Please insert your Pokemon's index! (Press enter to random)"
+puts "Please insert your Pokémon's index! (Press enter to random)"
 choice = gets.chomp
 
 p1 =
@@ -223,22 +218,22 @@ p1 =
   when "3" then snorlax
   when "4" then squirtle
   when ""
-    puts "You randomly chose a Pokemon"
+    puts "You randomly chose a Pokémon"
     pokemons.sample
   else
-    puts "Invalid choice, you will be given a random Pokemon."
+    puts "Invalid choice, you will be given a random Pokémon."
     pokemons.sample
   end
 
 pokemons.delete(p1)
 
-p2 = pokemons.sample  # Randomly select opponent Pokemon
+p2 = pokemons.sample  # Randomly select opponent Pokémon
 
 puts "You chose #{p1.name}!"
 puts "Your rival chose #{p2.name}!"
 
 puts "============================================"
-puts "POKEMONS INFO"
+puts "POKEMONS' INFO"
 show_info(p1, p2)
 puts "============================================"
 
