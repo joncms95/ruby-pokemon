@@ -5,16 +5,17 @@
 #     3. A battle simulation will be done between p1's pokemon and p2's pokemon
 
 class Pokemon
-  attr_accessor :name, :evolved, :type, :hp, :power, :strength, :weakness
+  attr_accessor :name, :evolved, :ultimate_evolved, :type, :hp, :power, :strength, :weakness
 
-  def initialize(name, evolved, type, hp, power, strength, weakness)
-    @name = name
-    @evolved = evolved
-    @type = type
-    @hp = hp
-    @power = power
-    @strength = strength
-    @weakness = weakness
+  def initialize(name, evolved, ultimate_evolved, type, hp, power, strength, weakness)
+    self.name = name
+    self.evolved = evolved
+    self.ultimate_evolved = ultimate_evolved
+    self.type = type
+    self.hp = hp
+    self.power = power
+    self.strength = strength
+    self.weakness = weakness
   end
 
   def attack(opponent)
@@ -30,15 +31,15 @@ class Pokemon
   end
 
   def alive?
-    hp > 0
+    self.hp > 0
   end
 
   def evolved?
-    hp > 50
+    self.hp > 50 || self.power > 20
   end
 
-  def to_s
-    @name
+  def ultimate_evolved?
+    self.hp > 50 && self.power > 20
   end
 end
 
@@ -66,24 +67,32 @@ end
 
 def is_evolve?(*p)
   p.each do |pokemon|
-    next unless pokemon.hp > 50 || pokemon.power > 20
-
     child = pokemon.name
-    pokemon.name = pokemon.evolved
-    puts "!!!\nWhat's happening? It seems like #{child} has evolved to #{pokemon.name}!"
+    if pokemon.ultimate_evolved?
+      pokemon.name = pokemon.ultimate_evolved
+      puts "!!!\nWhat's happening? It seems like #{child} has evolved to #{pokemon.name}!"
+    elsif pokemon.evolved?
+      pokemon.name = pokemon.evolved
+      puts "!!!\nWhat's happening? It seems like #{child} has evolved to #{pokemon.name}!"
+    end
   end
 end
 
 # List of Pokemon
 pokemons = [
-  bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Grass', 20+rand(100), 10+rand(20), 'Water', 'Fire'),
-  charmander = Pokemon.new('Charmander', 'Charmeleon', 'Fire', 20+rand(100), 10+rand(20), 'Grass', 'Water'),
-  squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Water', 20+rand(100), 10+rand(20), 'Fire', 'Grass')
+  # bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Venusaur' 'Grass', 20+rand(100), 10+rand(20), 'Water', 'Fire'),
+  # charmander = Pokemon.new('Charmander', 'Charmeleon', 'Charizard', 'Fire', 20+rand(100), 10+rand(20), 'Grass', 'Water'),
+  # squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Blastoise', 'Water', 20+rand(100), 10+rand(20), 'Fire', 'Grass')
+  
+  # test evolve function
+  bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Venusaur', 'Grass', 51, 21, 'Water', 'Fire'),
+  charmander = Pokemon.new('Charmander', 'Charmeleon', 'Charizard', 'Fire', 20, 21, 'Grass', 'Water'),
+  squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Blastoise', 'Water', 10, 10, 'Fire', 'Grass')
 ]
 
 # Player chooses a starting Pokemon
 puts 'Choose your starting Pokemon:'
-pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon}" }
+pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon.name}" }
 puts "Please insert your Pokemon's index!"
 choice = gets.chomp.to_i
 
