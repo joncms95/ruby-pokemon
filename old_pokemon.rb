@@ -1,8 +1,9 @@
-#     Simple Pokemon Game in Ruby
-#
-#     1. Player 1 (p1) will choose one pokemon from the list of pokemons
-#     2. Player 2 (p2) will randomly pick one of the leftover pokemons
-#     3. A battle simulation will be done between p1's pokemon and p2's pokemon
+#     Simple Pokémon Game in Ruby
+#     --------------------------------------------------------------------------
+#     1. Player 1 (p1) will choose one Pokémon from the list of Pokémons.
+#     2. Player 2 (p2) will randomly pick one of the leftover Pokémons.
+#     3. A battle simulation will be done between p1's Pokémon and p2's Pokémon.
+#     --------------------------------------------------------------------------
 
 class Pokemon
   attr_accessor :name, :evolved, :ultimate_evolved, :type, :hp, :power, :strength, :weakness
