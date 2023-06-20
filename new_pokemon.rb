@@ -56,7 +56,7 @@ end
 
 class Bulbasaur < Pokemon
   def initialize
-    super("Bulbasaur", 100.0, 10.0, 0.1)
+    super('Bulbasaur', 100.0, 10.0, 0.1)
   end
 
   def use_skill(opponent)
@@ -64,7 +64,7 @@ class Bulbasaur < Pokemon
       leech_seed(opponent)
     else # initial hydration
       @skill_counter = 5
-      puts "Bulbasaur casts Leech Seed! Bulbasaur will draw 5 hp per turn. (Last for 5 turns)"
+      puts 'Bulbasaur casts Leech Seed! Bulbasaur will draw 5 hp per turn. (Last for 5 turns)'
       leech_seed(opponent)
     end
   end
@@ -82,7 +82,7 @@ end
 
 class Charmander < Pokemon
   def initialize
-    super("Charmandar", 90.0, 12.0, 0.2)
+    super('Charmandar', 90.0, 12.0, 0.2)
   end
 
   def use_skill(opponent)
@@ -100,7 +100,7 @@ end
 
 class Snorlax < Pokemon
   def initialize
-    super("Snorlax", 200.0, 5.0, 0.1)
+    super('Snorlax', 200.0, 5.0, 0.1)
   end
 
   def use_skill(_opponent = nil)
@@ -127,7 +127,7 @@ end
 
 class Squirtle < Pokemon
   def initialize
-    super("Squirtle", 120.0, 9.0, 0.2)
+    super('Squirtle', 120.0, 9.0, 0.2)
   end
 
   def use_skill(_opponent = nil)
@@ -147,13 +147,14 @@ class Squirtle < Pokemon
   end
 
   def reset_status
+    super
     self.defense_multiplier = 1.0 if @skill_counter == 0
   end
 end
 
 class Pikachu < Pokemon
   def initialize
-    super("Pikachu", 90.0, 12.0, 0.1)
+    super('Pikachu', 90.0, 12.0, 0.1)
   end
 
   def use_skill(opponent)
@@ -206,22 +207,22 @@ pokemons = [
 ]
 
 # Player chooses a starting Pokémon
-puts "Choose your starting Pokémon: (You can only randomly choose Pikachu)"
+puts 'Choose your starting Pokémon: (You can only randomly choose Pikachu)'
 pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon.name}" }
 puts "Please insert your Pokémon's index! (Press enter to random)"
 choice = gets.chomp
 
 p1 =
   case choice
-  when "1" then bulbasaur
-  when "2" then charmander
-  when "3" then snorlax
-  when "4" then squirtle
-  when ""
-    puts "You randomly chose a Pokémon"
+  when '1' then bulbasaur
+  when '2' then charmander
+  when '3' then snorlax
+  when '4' then squirtle
+  when ''
+    puts 'You randomly chose a Pokémon'
     pokemons.sample
   else
-    puts "Invalid choice, you will be given a random Pokémon."
+    puts 'Invalid choice, you will be given a random Pokémon.'
     pokemons.sample
   end
 
@@ -232,10 +233,10 @@ p2 = pokemons.sample  # Randomly select opponent Pokémon
 puts "You chose #{p1.name}!"
 puts "Your rival chose #{p2.name}!"
 
-puts "============================================"
+puts '============================================'
 puts "POKEMONS' INFO"
 show_info(p1, p2)
-puts "============================================"
+puts '============================================'
 
 puts "LET'S BATTLE!\n .\n ..\n ..."
 battle(p1, p2)

@@ -32,15 +32,15 @@ class Pokemon
   end
 
   def alive?
-    self.hp > 0
+    hp > 0
   end
 
   def evolved?
-    self.hp > 50 || self.power > 20
+    hp > 50 || power > 20
   end
 
   def ultimate_evolved?
-    self.hp > 50 && self.power > 20
+    hp > 50 && power > 20
   end
 end
 
@@ -84,7 +84,7 @@ pokemons = [
   # bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Venusaur' 'Grass', 20+rand(100), 10+rand(20), 'Water', 'Fire'),
   # charmander = Pokemon.new('Charmander', 'Charmeleon', 'Charizard', 'Fire', 20+rand(100), 10+rand(20), 'Grass', 'Water'),
   # squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Blastoise', 'Water', 20+rand(100), 10+rand(20), 'Fire', 'Grass')
-  
+
   # test evolve function
   bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Venusaur', 'Grass', 51, 21, 'Water', 'Fire'),
   charmander = Pokemon.new('Charmander', 'Charmeleon', 'Charizard', 'Fire', 20, 21, 'Grass', 'Water'),
