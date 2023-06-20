@@ -2,8 +2,7 @@
 #
 #     1. Player 1 (p1) will choose one pokemon from the list of pokemons
 #     2. Player 2 (p2) will randomly pick one of the leftover pokemons
-#     3. A battle simulation will be done between the p1's pokemon and p2's pokemon
-
+#     3. A battle simulation will be done between p1's pokemon and p2's pokemon
 
 class Pokemon
   attr_accessor :name, :type, :hp, :power, :strength, :weakness
@@ -20,10 +19,10 @@ class Pokemon
   def attack(opponent)
     damage = rand(1..power)
     if opponent.type == strength
-      damage *= 2  # Double damage against weakness
+      damage *= 2  # Double damage against your strength type
       puts "It's super effective!"
     elsif opponent.type == weakness
-      damage /= 2  # Half damage against strength
+      damage /= 2  # Half damage against your weakness type
       puts "It's not very effective..."
     end
     opponent.hp -= damage
@@ -43,11 +42,8 @@ def battle(p1, p2)
   while p1.alive? && p2.alive?
     p1.attack(p2)
     p2.attack(p1)
-    if p1.hp < 0
-      p1.hp = 0
-    elsif p2.hp < 0
-      p2.hp = 0
-    end
+    p1.hp = 0 if p1.hp < 0
+    p2.hp = 0 if p2.hp < 0
     puts "Your HP: #{p1.hp} / opponent HP: #{p2.hp}"
   end
 
@@ -60,9 +56,9 @@ def battle(p1, p2)
   end
 end
 
-  def show_info(*p)
-    p.each_with_index {|x, i| puts "Player #{i + 1}: #{x.name}, HP: #{x.hp}, Power: #{x.power}"}
-  end
+def show_info(*p)
+  p.each_with_index { |x, i| puts "Player #{i + 1}: #{x.name}, HP: #{x.hp}, Power: #{x.power}" }
+end
 
 # List of Pokemon
 pokemons = [
@@ -93,10 +89,10 @@ p2 = pokemons.sample  # Randomly select opponent Pokemon
 
 puts "You chose #{p1.name}!"
 puts "Your rival chose #{p2.name}!"
-puts "============="
+puts '============='
 puts 'PLAYERS INFO'
 show_info(p1, p2)
-puts "============="
+puts '============='
 
 puts "LET'S BATTLE!\n .\n ..\n ..."
 battle(p1, p2)
