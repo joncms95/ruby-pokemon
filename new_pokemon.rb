@@ -9,7 +9,7 @@
 class Pokemon
   attr_accessor :name, :hp, :attack, :attack_multiplier, :defense_multiplier, :stun_status, :skill_rng
 
-  def initialize(name, hp, attack, skill_rng)
+  def initialize(name, hp, attack, skill_rng) test
     @name = name
     @hp = hp
     @attack = attack
