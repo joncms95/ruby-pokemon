@@ -87,12 +87,12 @@ class Charmander < Pokemon
 
   def use_skill(opponent)
     ember(opponent)
-    puts "#{name} casts Ember! #{name} burns #{opponent.name} and deals #{@skill_damage} damage."
+    puts "#{@name} casts Ember! #{@name} burns #{opponent.name} and deals #{@skill_damage} damage."
   end
 
   def ember(opponent)
     critical_hit?
-    @skill_damage = ((attack * 2) * @attack_multiplier * opponent.defense_multiplier)
+    @skill_damage = ((@attack * 2) * @attack_multiplier * opponent.defense_multiplier)
     opponent.hp -= @skill_damage
     @attack_multiplier = 1.0
   end
@@ -114,7 +114,7 @@ class Snorlax < Pokemon
       @skill_counter -= 1
     end
   end
-
+  
   def rest
     self.hp += 50
     @attack_status = false
