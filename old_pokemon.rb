@@ -1,9 +1,9 @@
-#     Simple Pokémon Game in Ruby
-#     --------------------------------------------------------------------------
-#     1. Player 1 (p1) will choose one Pokémon from the list of Pokémons.
-#     2. Player 2 (p2) will randomly pick one of the leftover Pokémons.
-#     3. A battle simulation will be done between p1's Pokémon and p2's Pokémon.
-#     --------------------------------------------------------------------------
+# Simple Pokémon Game in Ruby
+# --------------------------------------------------------------------------
+# 1. Player 1 (p1) will choose one Pokémon from the list of Pokémons.
+# 2. Player 2 (p2) will randomly pick one of the leftover Pokémons.
+# 3. A battle simulation will be done between p1's Pokémon and p2's Pokémon.
+# --------------------------------------------------------------------------
 
 class Pokemon
   attr_accessor :name, :evolved, :ultimate_evolved, :type, :hp, :power, :strength, :weakness
@@ -88,7 +88,7 @@ pokemons = [
   # test evolve function
   bulbasaur = Pokemon.new('Bulbasaur', 'Ivysaur', 'Venusaur', 'Grass', 51, 21, 'Water', 'Fire'),
   charmander = Pokemon.new('Charmander', 'Charmeleon', 'Charizard', 'Fire', 20, 21, 'Grass', 'Water'),
-  squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Blastoise', 'Water', 10, 10, 'Fire', 'Grass')
+  squirtle = Pokemon.new('Squirtle', 'Wartortle', 'Blastoise', 'Water', 10, 10, 'Fire', 'Grass'),
 ]
 
 # Player chooses a starting Pokemon
@@ -97,8 +97,7 @@ pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon.name}" }
 puts "Please insert your Pokemon's index!"
 choice = gets.chomp.to_i
 
-p1 =
-  case choice
+p1 = case choice
   when 1 then bulbasaur
   when 2 then charmander
   when 3 then squirtle

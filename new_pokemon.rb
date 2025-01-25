@@ -1,9 +1,9 @@
-#     Simple Pokémon Game in Ruby
-#     --------------------------------------------------------------------------
-#     1. Player 1 (p1) will choose one Pokémon from the list of Pokémons.
-#     2. Player 2 (p2) will randomly pick one of the leftover Pokémons.
-#     3. A battle simulation will be done between p1's Pokémon and p2's Pokémon.
-#     --------------------------------------------------------------------------
+# Simple Pokémon Game in Ruby
+# --------------------------------------------------------------------------
+# 1. Player 1 (p1) will choose one Pokémon from the list of Pokémons.
+# 2. Player 2 (p2) will randomly pick one of the leftover Pokémons.
+# 3. A battle simulation will be done between p1's Pokémon and p2's Pokémon.
+# --------------------------------------------------------------------------
 
 # Classes
 class Pokemon
@@ -114,7 +114,7 @@ class Snorlax < Pokemon
       @skill_counter -= 1
     end
   end
-  
+
   def rest
     self.hp += 50
     @attack_status = false
@@ -203,7 +203,7 @@ pokemons = [
   charmander = Charmander.new,
   snorlax = Snorlax.new,
   squirtle = Squirtle.new,
-  pikachu = Pikachu.new
+  pikachu = Pikachu.new,
 ]
 
 # Player chooses a starting Pokémon
@@ -212,8 +212,7 @@ pokemons.each_with_index { |pokemon, i| puts " #{i + 1}) #{pokemon.name}" }
 puts "Please insert your Pokémon's index! (Press enter to random)"
 choice = gets.chomp
 
-p1 =
-  case choice
+p1 = case choice
   when '1' then bulbasaur
   when '2' then charmander
   when '3' then snorlax
